@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>d3js学习之第一个d3图</title>
+	<style>
+		/*p{
+			color:red;
+			font-size:30px;
+		}*/
+		/*svg{
+			background-color: #000;
+		}*/
+
+		/*div{
+			background: blue;
+			display: inline-block;
+			width: 20px;
+			margin-right: 3px;
+		}*/
+	</style>
+</head>
+<body>
+	<!-- 画图分三步：
+		1、转换数据
+		2、调用生成器
+		3、画图 -->
+<!-- <p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p> -->
+<svg id="chart" width="250" height="100"></svg>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+	//第一步，创建一个arc生成器
+	// var arc=d3.arc();
+
+	//第二步，转换数据 
+	 // var myData={
+	 // 	innerRadius:80,
+	 // 	outerRadius:100,
+	 // 	startAngle:0,
+	 // 	endAngle:2*Math.PI
+	 // };
+	 //数据转换
+	// var outData=arc(myData);
+
+	//console.log(outData);
+	 
+	//第三步，绘制图形
+
+	//选择d3.js物品选择器选择一个节点，插入svg元素
+	// var svg=d3.select('body') //选择body节点
+	// 			.append('svg')//添加svg节点
+	// 			.attr('width',400)//设置svg节点的宽度 
+	// 			.attr('height',400);//设置高度
+				
+	//在svg中绘制
+	// svg.append('g')//添加g元素
+	// 		.attr('transform',"translate("+(400/2)+","+(400/2)+")")//设置图像在svg中的位置
+	// 		.append('path')//添加路径元素
+	// 		.attr('fill','#000')//填充颜色,黑色
+	// 		.attr('d',outData);
+
+	// 例子：现有2个p元素要与数据dataset中的数据绑定，并分析update部分和enter部分。
+	// var dataSet=[13,45,32,55,99];
+
+	// var p=d3.select('body').selectAll('p');
+				
+	// //update部分
+	// var update=p.data(dataSet);
+	// //enter部分
+	// var enter=update.enter();
+
+	// update.text(function(d){
+	// 	return "update:"+d;
+	// });
+
+	// enter.append('p')
+	//      .text(function(d){
+	// 	return 'enter:'+d;
+	// })
+
+	 // 例子：现有数据dataSet中的数据与5个p元素绑定，并分析update部分和enter部分
+	 // var dataSet=[10,33];
+
+	 // var p= d3.select('body').selectAll('p');
+
+	 // var update=p.data(dataSet);
+
+	 // var exit=update.exit();
+
+	 // update.text(function(d){
+	 // 	return 'update:'+d;
+	 // });
+
+	 // // exit.text(function(d){
+	 // // 	return "exit";
+	 // // })
+	 // exit.remove();
+
+		// 1、转换数据
+		// 2、调用生成器
+		// 3、画图
+
+
+
+		// var dataSet=[4, 8, 15, 16, 23, 42];
+
+		// var div=d3.select('body').selectAll('div')
+		// 					.data(dataSet)
+		// 					.enter()
+		// 					.append('div')
+		// 					.style('height',(d)=>d+'px' );
+
+	/*
+	
+		Github贡献表
+
+	*/	
+
+	// const colorMap=d3.interpolateRgb(
+	// 			d3.rgb('red'),
+	// 			d3.rgb('green')
+	// 	)
+
+	// d3.select('body')
+	// 	.selectAll('div')
+	// 	.data([.2,.4,0,0,.13,.92])
+	// 	.enter()
+	// 	.append('div')
+	// 	.style('background-color',(d)=>{
+	// 		return d==0? '#eee' : colorMap(d);
+	// 	})
+
+	// var data=[{
+	// 	label:'7am',
+	// 	sales:20
+	// },{
+	// 	label:'8am',
+	// 	sales:12
+	// },{
+	// 	label:'9am',
+	// 	sales:8
+	// },{
+	// 	label:'10am',
+	// 	sales:27
+	// }]
+
+	// var g=d3.select('#chart')
+	// 			.selectAll('g')
+	// 			.data(data)
+	// 			.enter()
+	// 			.append('g');
+
+	// 	g.append('circle')
+	// 		.attr('cy',40)
+	// 		.attr('cx',(d,i)=>(i+1)*50)
+	// 		.attr('r',(d)=>d.sales);
+		
+	// 	g.append('text')
+	// 		.attr('y',90)
+	// 		.attr('x',(d,i)=>(i+1)*50)
+	// 		.text((d)=>d.label)
+
+	var data=[
+			  {x:0,y:30},
+			  {x:50,y:20},
+			  {x:100,y:40},
+			  {x:150,y:80},
+			  {x:200,y:95}
+		];
+
+	const line = d3.svg.line()
+					.x((d)=>d.x)
+					.y((d)=>100-d.y)
+					.interpolate('linear');
+
+		d3.select('#chart')
+			.append('path')
+			.attr('stroke-width',2)
+			.attr('d',line(data));				
+</script>
+<style>
+	/*div{
+		width: 40px;
+		height: 40px;
+		margin-right: 5px;
+		display: inline-block;
+	}*/
+	/*circle{
+		fill:#4A988A;
+	}
+	text{
+		font-family: 'Open Sans';
+		text-anchor:middle;
+		color:rgb(34,​ 34,​ 34);
+		font-size: 12px;
+	}*/
+	path{
+		fill:none;
+		stroke:green;
+	}
+
+</style>
+
+
+</body>
+</html>
